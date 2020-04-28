@@ -32,17 +32,9 @@ for repository in repositories:
 
     for object in object_list:
         if os.path.isfile(object):
-            with codecs.open(object, 'rb') as f:
+            with codecs.open(object, 'rb', 'utf-8', 'ignore') as f:
                 lines = f.readlines()
                 for line in lines:
-                    char_dat = chardet.detect(line)
-                    encoding = char_dat.get("encoding")
-                    if encoding == None:
-                        line = repr(line)
-                    elif encoding == "Windows-1254" or encoding == "TIS-620" or encoding == "Windows-1252" or encoding == "windows-1253" or encoding == "Windows-1253" or encoding == "windows-1255":
-                        continue
-                    else:
-                        line = line.decode(encoding)
                     if search_word in line:
                         print(line)
                         
