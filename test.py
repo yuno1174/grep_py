@@ -1,5 +1,11 @@
 # coding= utf-8
-import subprocess, json, os, pathlib, glob, codecs, chardet
+import sys, subprocess, json, os, pathlib, glob, codecs, chardet
+
+args = sys.argv
+print(args)
+print("検索対象文字列：" + args[1])
+
+search_word = args[1]
 
 print("current_dir: " + os.getcwd())
 
@@ -15,8 +21,6 @@ print(repositories_result.returncode)
 print(repositories_result.stdout)
 json_load = json.loads(repositories_result.stdout)
 repositories = json_load.get("repositories")
-
-search_word = "cpu"
 
 for repository in repositories:
     repository_name = repository.get("repositoryName")
